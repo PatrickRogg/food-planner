@@ -82,7 +82,6 @@ export class SelectMealComponent {
         }
       }
     }
-    console.log(toBuyIngredients);
     return new GroceryList(this.weekday, oldGroceryList.boughtIngredients, toBuyIngredients);
   }
 

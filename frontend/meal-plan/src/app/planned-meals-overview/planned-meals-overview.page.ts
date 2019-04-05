@@ -5,6 +5,8 @@ import { Meal } from 'src/models/meal.model';
 import { SelectMealComponent } from './select-meal/select-meal.component';
 import { OverlayEventDetail } from '@ionic/core';
 import { Store } from '@ngrx/store';
+import { GroceryList } from 'src/models/grocery-list.model';
+import { AppCloseApiService } from '../shared/service/api/app-close-api.service';
 
 @Component({
   selector: 'app-planned-meals-overview',
@@ -19,11 +21,25 @@ export class PlannedMealsOverviewPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private store: Store<any>,
+    private appCloseApiService: AppCloseApiService
   ) { }
 
   ngOnInit() {
     this.getWeekdays();
     this.getMeals();
+  }
+
+  buttonclick() {
+    this.store.select('groceryList').subscribe(data => {
+      const groceryLists: GroceryList[] = [];
+      for (const key in data.entities) {
+        if (data.entities.hasOwnProperty(key)) {
+          const element = data.entities[key];
+          groceryLists.push(element);
+        }
+      }
+      this.appCloseApiService.sendAllDataToServer(groceryLists).subscribe();
+    });
   }
 
   getWeekdays() {

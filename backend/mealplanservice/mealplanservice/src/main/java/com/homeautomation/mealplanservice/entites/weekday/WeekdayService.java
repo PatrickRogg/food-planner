@@ -1,5 +1,6 @@
 package com.homeautomation.mealplanservice.entites.weekday;
 
+import com.homeautomation.mealplanservice.entites.meal.Meal;
 import com.homeautomation.mealplanservice.entities.grocerylist.GroceryList;
 import com.homeautomation.mealplanservice.entities.grocerylist.GroceryListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,16 @@ public class WeekdayService {
         return Stream.of(currDate, currDate.plusDays(1), currDate.plusDays(2), currDate.plusDays(3))
                 .map(date -> weekdayRepository.findByDate(date))
                 .collect(Collectors.toList());
+    }
+
+    public List<Weekday> updateMultipleWeekdays(List<Weekday> weekdays) {
+        System.out.println(weekdays);
+        return weekdayRepository.saveAll(weekdays);
+    }
+
+    public void createWeekdayAndDeleteOldWeekday() {
+        Weekday weekdayToDelete = weekdayRepository.findByDate(LocalDate.now().minusDays(1));
+        deleteById(weekdayToDelete.getId());
+        create(new Weekday());
     }
 }

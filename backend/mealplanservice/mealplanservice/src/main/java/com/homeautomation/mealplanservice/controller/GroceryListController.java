@@ -28,9 +28,4 @@ public class GroceryListController {
     public GroceryList get(@PathVariable("id") long id) {
         return groceryListService.findBy(id);
     }
-
-    @PutMapping("{id}")
-    public GroceryList update(@PathVariable("id") long id, @RequestBody GroceryList groceryList) {
-        return groceryListService.update(groceryList);
-    }
 }

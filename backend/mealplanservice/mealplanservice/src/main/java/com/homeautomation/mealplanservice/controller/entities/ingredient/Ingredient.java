@@ -18,7 +18,7 @@ public class Ingredient {
 
     private String unit;
 
-    public Ingredient(String designation, double quantity, String unit, boolean isBought) {
+    public Ingredient(String designation, double quantity, String unit) {
         this.designation = designation;
         this.quantity = quantity;
         this.unit = unit;

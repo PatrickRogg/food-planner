@@ -36,8 +36,8 @@ public class WeekdayController {
     }
 
     @PutMapping("{id}")
-    public Weekday updateWeekday(@PathVariable("id") long id, @RequestBody Weekday Weekday) {
-        return weekdayService.update(Weekday);
+    public Weekday updateWeekday(@PathVariable("id") long id, @RequestBody Weekday weekday) {
+        return weekdayService.update(weekday);
     }
 
     @DeleteMapping("{id}")

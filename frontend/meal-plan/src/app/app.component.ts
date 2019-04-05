@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,6 +13,11 @@ import * as mealActions from './shared/ngrx/actions/meal.actions';
 import * as weekdayActions from './shared/ngrx/actions/weekday.actions';
 import * as groceryListActions from './shared/ngrx/actions/grocery-list.actions';
 import { GroceryListApiService } from './shared/service/api/grocery-list-api.service';
+import { Ingredient } from 'src/models/ingredient.model';
+import { Meal } from 'src/models/meal.model';
+import { Weekday } from 'src/models/weekday.model';
+import { GroceryList } from 'src/models/grocery-list.model';
+import { AppCloseApiService } from './shared/service/api/app-close-api.service';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +32,7 @@ export class AppComponent {
     private mealApiService: MealApiService,
     private ingredientApiService: IngredientApiService,
     private groceryListApiService: GroceryListApiService,
+    private appCloseApiService: AppCloseApiService,
     private store: Store<any>,
   ) {
     this.initializeApp();
@@ -37,6 +43,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.initializeStore();
+      this.subscribeToAppClose();
     });
   }
 
@@ -63,6 +70,12 @@ export class AppComponent {
       groceryLists.forEach(groceryList => {
         this.store.dispatch(new groceryListActions.CreateGroceryList(groceryList));
       });
+    });
+  }
+
+  subscribeToAppClose() {
+    window.addEventListener('beforeunload', () => {
+      
     });
   }
 }

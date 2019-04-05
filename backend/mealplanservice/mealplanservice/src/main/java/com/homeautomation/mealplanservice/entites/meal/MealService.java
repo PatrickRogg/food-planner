@@ -32,4 +32,8 @@ public class MealService {
     }
 
 
+    public List<Meal> updateMultiple(List<Meal> meals) {
+        System.out.println(meals);
+        return mealRepository.saveAll(meals);
+    }
 }

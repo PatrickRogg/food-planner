@@ -31,18 +31,18 @@ public class DefaultData {
 
     @EventListener(ApplicationReadyEvent.class)
     public synchronized void createDefaultData() {
-    	ingredientService.create(new Ingredient("Tomate", 10.0, "kg", false));
-    	ingredientService.create(new Ingredient("Mais", 1.0, "kg", false));
-    	ingredientService.create(new Ingredient("Milch", 10.0, "kg", false));
-    	ingredientService.create(new Ingredient("Nudeln", 3.0, "kg", false));
-    	ingredientService.create(new Ingredient("Reis", 120.0, "kg", false));
-    	ingredientService.create(new Ingredient("Karotte", 123.0, "kg", false));
-        ingredientService.create(new Ingredient("Oliven", 10.0, "kg", false));
-        ingredientService.create(new Ingredient("Rind", 1.0, "kg", false));
-        ingredientService.create(new Ingredient("Schwein", 10.0, "kg", false));
-        ingredientService.create(new Ingredient("Käse", 3.0, "kg", false));
-        ingredientService.create(new Ingredient("Petersilie", 120.0, "kg", false));
-        ingredientService.create(new Ingredient("Champions", 123.0, "kg", false));
+    	ingredientService.create(new Ingredient("Tomate", 1, "kg"));
+    	ingredientService.create(new Ingredient("Mais", 1.0, "kg"));
+    	ingredientService.create(new Ingredient("Milch", 10.0, "kg"));
+    	ingredientService.create(new Ingredient("Nudeln", 3.0, "kg"));
+    	ingredientService.create(new Ingredient("Reis", 120.0, "kg"));
+    	ingredientService.create(new Ingredient("Karotte", 123.0, "kg"));
+        ingredientService.create(new Ingredient("Oliven", 10.0, "kg"));
+        ingredientService.create(new Ingredient("Rind", 1.0, "kg"));
+        ingredientService.create(new Ingredient("Schwein", 10.0, "kg"));
+        ingredientService.create(new Ingredient("Käse", 3.0, "kg"));
+        ingredientService.create(new Ingredient("Petersilie", 120.0, "kg"));
+        ingredientService.create(new Ingredient("Champions", 123.0, "kg"));
 
         mealService.create(new Meal("Spaghetti Bolonese", Arrays.asList(new Ingredient[]{ingredientService.findBy(1L), ingredientService.findBy(2L)})));
         mealService.create(new Meal("Spaghetti Carbonara", Arrays.asList(new Ingredient[]{ingredientService.findBy(3L), ingredientService.findBy(4L)})));

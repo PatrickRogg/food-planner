@@ -34,6 +34,7 @@ public class Weekday {
     }
 
     public Weekday() {
+        this.date = LocalDate.now();
     }
 
     public long getId() {
