@@ -2,10 +2,12 @@ package com.homeautomation.mealplanservice.entites.meal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class MealService {
 
     @Autowired
@@ -29,11 +31,5 @@ public class MealService {
 
     public void deleteBy(long id) {
         mealRepository.deleteById(id);
-    }
-
-
-    public List<Meal> updateMultiple(List<Meal> meals) {
-        System.out.println(meals);
-        return mealRepository.saveAll(meals);
     }
 }
