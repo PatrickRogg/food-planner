@@ -29,19 +29,6 @@ export class PlannedMealsOverviewPage implements OnInit {
     this.getMeals();
   }
 
-  buttonclick() {
-    this.store.select('groceryList').subscribe(data => {
-      const groceryLists: GroceryList[] = [];
-      for (const key in data.entities) {
-        if (data.entities.hasOwnProperty(key)) {
-          const element = data.entities[key];
-          groceryLists.push(element);
-        }
-      }
-      this.appCloseApiService.sendAllDataToServer(groceryLists).subscribe();
-    });
-  }
-
   getWeekdays() {
     this.store.select('weekday').subscribe(data => {
       this.weekdays = [];

@@ -48,6 +48,7 @@ const routes: Routes = [{
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
+  exports: [TabsPage]
 })
 export class TabsPageModule { }

@@ -1,5 +1,4 @@
 <ion-content padding>
-  <ion-button (click)="buttonclick()">sdfds</ion-button>
   <ion-card *ngFor="let weekday of weekdays; let i = index;" class="ion-margin-bottom" color="primary">
     <ion-card-header class="ion-no-padding ion-padding-start ion-padding-top">
       <ion-card-subtitle i18n="@@weekday" id="card-title">{{ weekday.date | date: 'EEEE'}}</ion-card-subtitle>

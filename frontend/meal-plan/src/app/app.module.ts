@@ -13,14 +13,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { TabsPage } from './tabs/tabs.page';
 import { reducers } from './shared/ngrx';
+import { TabsPageModule } from './tabs/tabs.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TabsPage,
   ],
   entryComponents: [],
   imports: [
@@ -32,7 +31,8 @@ import { reducers } from './shared/ngrx';
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    TabsPageModule,
   ],
   providers: [
     StatusBar,

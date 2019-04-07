@@ -31,7 +31,7 @@ public class DefaultData {
 
     @EventListener(ApplicationReadyEvent.class)
     public synchronized void createDefaultData() {
-    	ingredientService.create(new Ingredient("Tomate", 1, "kg"));
+    	ingredientService.create(new Ingredient("Tomate", 1 , "kg"));
     	ingredientService.create(new Ingredient("Mais", 1.0, "kg"));
     	ingredientService.create(new Ingredient("Milch", 10.0, "kg"));
     	ingredientService.create(new Ingredient("Nudeln", 3.0, "kg"));
