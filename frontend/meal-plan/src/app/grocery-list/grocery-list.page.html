@@ -1,0 +1,17 @@
+<ion-content padding>
+  <ion-item-group *ngFor="let groceryList of groceryLists">
+    <ion-item-divider>
+      <ion-label>{{groceryList.weekday.date | date: 'EEEE'}}</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let ingredient of groceryList.toBuyIngredients" 
+    (click)="addToBought(ingredient, groceryList)" color="danger">
+      <ion-label>{{ingredient.designation}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let ingredient of groceryList.boughtIngredients" 
+    (click)="removeFromBought(ingredient, groceryList)" color="success">
+      <ion-label>{{ingredient.designation}}</ion-label>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <a slot="end" id="close-button" (click)="dismissModal()">Close</a>
+    <ion-title>Add Ingredient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Designation:</ion-label>
+    <ion-input [(ngModel)]="ingredient.designation"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Quantity:</ion-label>
+    <ion-input type="number" [(ngModel)]="ingredient.quantity"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Unit</ion-label>
+    <ion-select placeholder="Select Uit" [(ngModel)]="ingredient.unit">
+      <ion-select-option value="kg">kg</ion-select-option>
+      <ion-select-option value="g">g</ion-select-option>
+      <ion-select-option value="pieces">pieces</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button (click)="addIngredient()">Add</ion-button>
+</ion-content>

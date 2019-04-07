@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <a slot="end" id="close-button" (click)="dismissModal()">Close</a>
+    <ion-title>{{ weekday.date | date: "EEEE" }} {{ mealType }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let meal of meals" class="button-wrapper">
+    <ion-button expand="block" color="light" *ngIf="selectedMeal !== meal" (click)="onMealSelect(meal)">
+      {{ meal.designation }}
+    </ion-button>
+    <ion-button expand="block" color="primary" *ngIf="selectedMeal === meal" (click)="onMealSelect(meal)">
+      {{ meal.designation }}
+    </ion-button>
+  </div>
+</ion-content>
