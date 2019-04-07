@@ -1,7 +1,0 @@
-{
-  "name": "what-should-i-eat",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
