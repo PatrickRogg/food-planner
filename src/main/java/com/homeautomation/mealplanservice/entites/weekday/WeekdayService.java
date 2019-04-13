@@ -56,8 +56,6 @@ public class WeekdayService {
     }
 
     public void createWeekdayAndDeleteOldWeekday() {
-        Weekday weekdayToDelete = weekdayRepository.findByDate(LocalDate.now().minusDays(1));
-        deleteById(weekdayToDelete.getId());
-        create(new Weekday());
+        create(new Weekday(LocalDate.now().plusDays(3), new Meal(), new Meal(), new Meal()));
     }
 }
