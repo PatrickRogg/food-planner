@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Designation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ingredientDetail of ingredientDetails">
+      <td>{{ingredientDetail.id}}</td>
+      <td>{{ingredientDetail.designation}}</td>
+      <td><button class="btn btn-primary" (click)="editIngredientDetail(ingredientDetail)">Edit</button></td>
+      <td><button class="btn btn-danger" (click)="deleteIngredientDetail(ingredientDetail)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>

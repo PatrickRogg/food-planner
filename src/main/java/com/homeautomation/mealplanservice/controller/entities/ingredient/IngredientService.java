@@ -1,5 +1,6 @@
 package com.homeautomation.mealplanservice.controller.entities.ingredient;
 
+import com.homeautomation.mealplanservice.controller.entities.ingredient.detail.IngredientDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,26 +24,11 @@ public class IngredientService {
     }
 
     public Ingredient create(Ingredient ingredient) {
-        Ingredient existingIngredientWithDesignation = findByDesignation(ingredient.getDesignation());
-        if (existingIngredientWithDesignation == null) {
-            // TODO Exception
-        }
         return ingredientRepository.save(ingredient);
     }
 
-    public  Ingredient findByDesignation(String designation) {
-        return ingredientRepository.findByDesignation(designation);
-    }
-
     public Ingredient update(Ingredient ingredient, long id) {
-        Ingredient toUpdateIngredient = findBy(id);
-
-        if (toUpdateIngredient == null) {
-            toUpdateIngredient = new Ingredient(ingredient.getDesignation(), ingredient.getQuantity(), ingredient.getUnit());
-        } else {
-            toUpdateIngredient.setDesignation(ingredient.getDesignation());
-        }
-        return ingredientRepository.save(toUpdateIngredient);
+        return ingredientRepository.save(ingredient);
     }
 
     public void deleteBy(long id) {

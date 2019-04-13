@@ -50,11 +50,6 @@ public class WeekdayService {
                 .collect(Collectors.toList());
     }
 
-    public List<Weekday> updateMultipleWeekdays(List<Weekday> weekdays) {
-        System.out.println(weekdays);
-        return weekdayRepository.saveAll(weekdays);
-    }
-
     public void createWeekdayAndDeleteOldWeekday() {
         create(new Weekday(LocalDate.now().plusDays(3), new Meal(), new Meal(), new Meal()));
     }

@@ -1,5 +1,6 @@
 package com.homeautomation.mealplanservice.controller.entities.ingredient;
 
+import com.homeautomation.mealplanservice.controller.entities.ingredient.detail.IngredientDetail;
 import com.homeautomation.mealplanservice.entites.meal.Meal;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,14 +13,15 @@ public class Ingredient {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    private String designation;
+    @ManyToOne
+    private IngredientDetail ingredientDetail;
 
     private double quantity;
 
     private String unit;
 
-    public Ingredient(String designation, double quantity, String unit) {
-        this.designation = designation;
+    public Ingredient(IngredientDetail ingredientDetail, double quantity, String unit) {
+        this.ingredientDetail = ingredientDetail;
         this.quantity = quantity;
         this.unit = unit;
     }
@@ -35,12 +37,12 @@ public class Ingredient {
         this.id = id;
     }
 
-    public String getDesignation() {
-        return designation;
+    public IngredientDetail getIngredientDetail() {
+        return ingredientDetail;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setIngredientDetail(IngredientDetail ingredientDetail) {
+        this.ingredientDetail = ingredientDetail;
     }
 
     public double getQuantity() {
