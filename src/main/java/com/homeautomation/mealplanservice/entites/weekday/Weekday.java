@@ -33,6 +33,10 @@ public class Weekday {
         this.dinner = dinner;
     }
 
+    public Weekday(LocalDate date) {
+        this.date = date;
+    }
+
     public Weekday() {
         this.date = LocalDate.now();
     }

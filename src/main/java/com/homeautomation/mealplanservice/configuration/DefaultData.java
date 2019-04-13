@@ -29,7 +29,16 @@ public class DefaultData {
     @Autowired
     private MealService mealService;
 
-//    @EventListener(ApplicationReadyEvent.class)
+    @EventListener(ApplicationReadyEvent.class)
+    public synchronized void createDefaultData() {
+        weekdayService.create(new Weekday(LocalDate.now()));
+        weekdayService.create(new Weekday(LocalDate.now().plusDays(1)));
+        weekdayService.create(new Weekday(LocalDate.now().plusDays(2)));
+        weekdayService.create(new Weekday(LocalDate.now().plusDays(3)));
+
+    }
+
+    //    @EventListener(ApplicationReadyEvent.class)
 //    public synchronized void createDefaultData() {
 //    	ingredientService.create(new Ingredient("Tomate", 1 , "kg"));
 //    	ingredientService.create(new Ingredient("Mais", 1.0, "kg"));
@@ -44,11 +53,11 @@ public class DefaultData {
 //        ingredientService.create(new Ingredient("Petersilie", 120.0, "kg"));
 //        ingredientService.create(new Ingredient("Champions", 123.0, "kg"));
 //
-//        mealService.create(new Meal("Spaghetti Bolonese", Arrays.asList(new Ingredient[]{ingredientService.findBy(1L), ingredientService.findBy(2L)})));
-//        mealService.create(new Meal("Spaghetti Carbonara", Arrays.asList(new Ingredient[]{ingredientService.findBy(3L), ingredientService.findBy(4L)})));
-//        mealService.create(new Meal("Pizza", Arrays.asList(new Ingredient[]{ingredientService.findBy(5L), ingredientService.findBy(6L)})));
-//        mealService.create(new Meal("Salat", Arrays.asList(new Ingredient[]{ingredientService.findBy(7L), ingredientService.findBy(8L)})));
-//        mealService.create(new Meal("Reis mit Huhn", Arrays.asList(new Ingredient[]{ingredientService.findBy(9L), ingredientService.findBy(10L)})));
+//        mealService.create(new Meal("Spaghetti Bolonese", "http://google.com", Arrays.asList(new Ingredient[]{ingredientService.findBy(1L), ingredientService.findBy(2L)})));
+//        mealService.create(new Meal("Spaghetti Carbonara", "http://google.com",Arrays.asList(new Ingredient[]{ingredientService.findBy(3L), ingredientService.findBy(4L)})));
+//        mealService.create(new Meal("Pizza", "http://google.com",Arrays.asList(new Ingredient[]{ingredientService.findBy(5L), ingredientService.findBy(6L)})));
+//        mealService.create(new Meal("Salat", "http://google.com",Arrays.asList(new Ingredient[]{ingredientService.findBy(7L), ingredientService.findBy(8L)})));
+//        mealService.create(new Meal("Reis mit Huhn", "http://google.com",Arrays.asList(new Ingredient[]{ingredientService.findBy(9L), ingredientService.findBy(10L)})));
 //
 //        weekdayService.create(new Weekday(LocalDate.now(), mealService.findBy(1L),
 //                mealService.findBy(2L), mealService.findBy(3L)));

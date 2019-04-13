@@ -36,9 +36,15 @@ public class GroceryListService {
 
     private List<Ingredient> getIngredientsFromWeekday(Weekday weekday) {
         List<Ingredient> toBuyIngredients = new ArrayList<>();
-        toBuyIngredients.addAll(weekday.getBreakfast().getIngredients());
-        toBuyIngredients.addAll(weekday.getLunch().getIngredients());
-        toBuyIngredients.addAll(weekday.getDinner().getIngredients());
+        if (weekday.getBreakfast() != null) {
+            toBuyIngredients.addAll(weekday.getBreakfast().getIngredients());
+        }
+        if (weekday.getLunch() != null) {
+            toBuyIngredients.addAll(weekday.getLunch().getIngredients());
+        }
+        if (weekday.getDinner() != null) {
+            toBuyIngredients.addAll(weekday.getDinner().getIngredients());
+        }
         return toBuyIngredients;
     }
 

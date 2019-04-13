@@ -12,11 +12,11 @@ export class MealDetailPage implements OnInit {
   meal: Meal;
 
   constructor(
-    private router: Router,
     private mealDetailStateService: MealDetailStateService,
   ) { }
 
   ngOnInit() {
+    console.log(this.meal)
     this.getMeal();
   }
 

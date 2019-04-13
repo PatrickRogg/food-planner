@@ -16,11 +16,14 @@ public class Meal {
 
     private String designation;
 
+    private String recipeUrl;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Ingredient> ingredients;
 
-    public Meal(String designation, List<Ingredient> ingredients) {
+    public Meal(String designation, String recipeUrl, List<Ingredient> ingredients) {
         this.designation = designation;
+        this.recipeUrl = recipeUrl;
         this.ingredients = ingredients;
     }
 
@@ -42,6 +45,14 @@ public class Meal {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public String getRecipeUrl() {
+        return recipeUrl;
+    }
+
+    public void setRecipeUrl(String recipeUrl) {
+        this.recipeUrl = recipeUrl;
     }
 
     public List<Ingredient> getIngredients() {
