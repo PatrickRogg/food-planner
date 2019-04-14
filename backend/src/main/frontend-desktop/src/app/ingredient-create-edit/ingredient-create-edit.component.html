@@ -1,0 +1,14 @@
+<div class="container">
+  <h3 class="mb-5">{{title}} IngredientDetail</h3>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Designation</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Tomato" [(ngModel)]="ingredientDetail.designation">
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 text-right">
+      <button class="btn btn-lg btn-primary" (click)="submitForm()">Submit</button>
+    </div>
+  </div>
+</div>

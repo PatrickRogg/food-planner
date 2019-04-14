@@ -1,0 +1,66 @@
+<div class="container">
+  <h3 class="mb-5">{{title}} Meal</h3>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" style="width: 140px !important">Designation</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Spaghetti Bolonese" [(ngModel)]="meal.designation">
+  </div>
+  <div class="input-group-prepend mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" style="width: 140px !important">Recipe Url</span>
+    </div>
+    <input type="text" class="form-control" placeholder="https://google.com" [(ngModel)]="meal.recipeUrl">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01" style="width: 140px !important">IngredientDetail</label>
+    </div>
+    <select class="custom-select mr-3" id="inputGroupSelect01" [(ngModel)]="toAddIngredient.ingredientDetail">
+      <option [ngValue]="ingredientDetail" *ngFor="let ingredientDetail of ingredientDetails">{{ingredientDetail.designation}}</option>
+    </select>
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" style="width: 140px !important">Quantity</span>
+    </div>
+    <input type="number" class="form-control mr-3" [(ngModel)]="toAddIngredient.quantity">
+
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01" style="width: 140px !important">Ingredient</label>
+    </div>
+    <select class="custom-select  mr-3" id="inputGroupSelect01" [(ngModel)]="toAddIngredient.unit">
+      <option value="g">Gramm</option>
+      <option value="kg">Kilogramm</option>
+      <option value="pcs">Pieces</option>
+      <option value="l">Liter</option>
+    </select>
+
+    <button class="btn btn-success btn-sm" (click)="addIngredient()">Add</button>
+  </div>
+
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Quantity</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ingredient of meal.ingredients; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{ingredient.ingredientDetail.designation}}</td>
+        <td>{{ingredient.quantity}} {{ingredient.unit}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row pt-5">
+    <div class="col-12 text-right">
+      <button class="btn btn-lg btn-primary" (click)="submitForm()">Submit</button>
+    </div>
+  </div>
+</div>
