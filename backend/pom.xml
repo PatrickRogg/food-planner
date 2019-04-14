@@ -45,6 +45,18 @@
 		</dependency>
 
 	</dependencies>
+<plugin>
+    ...
+    <execution>
+        <goals>
+            <goal>install-node-and-npm</goal>
+        </goals>
+    </execution>
+    <configuration>
+        <nodeVersion>v8.12.0</nodeVersion>
+        <npmVersion>6.4.1</npmVersion>
+    </configuration>
+</plugin>
 
 	<build>
 		<plugins>
