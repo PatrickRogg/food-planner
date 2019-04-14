@@ -643,7 +643,7 @@ var MealListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-danger mb-5\">\n  <a class=\"navbar-brand\" routerLink=\"/\">Navbar</a>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-dark bg-danger mb-5\">\n  <a class=\"navbar-brand\" routerLink=\"/\">Mealplanner</a>\n</nav>\n"
 
 /***/ }),
 
