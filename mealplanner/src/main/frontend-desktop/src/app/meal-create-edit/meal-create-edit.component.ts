@@ -47,4 +47,7 @@ export class MealCreateEditComponent implements OnInit {
     this.toAddIngredient = new Ingredient(null, 0, 'g');
   }
 
+  public removeIngredient(index: number) {
+    this.meal.ingredients.splice(index, 1);
+  }
 }

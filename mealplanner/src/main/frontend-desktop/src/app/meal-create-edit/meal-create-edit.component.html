@@ -46,7 +46,6 @@
         <th scope="col">Designation</th>
         <th scope="col">Quantity</th>
         <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -54,6 +53,9 @@
         <td>{{i + 1}}</td>
         <td>{{ingredient.ingredientDetail.designation}}</td>
         <td>{{ingredient.quantity}} {{ingredient.unit}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="removeIngredient(i)">Löschen</button>
+        </td>
       </tr>
     </tbody>
   </table>
