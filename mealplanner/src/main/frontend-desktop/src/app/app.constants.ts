@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:8080/api/';
+import { environment  } from 'src/environments/environment';
+
+const API_URL = environment.apiUrl;
 
 export const MEAL_API_URL = API_URL + 'meals/';
 export const INGREDIENT_API_URL = API_URL + 'ingredients/';
