@@ -31,11 +31,12 @@ public class DefaultData {
 
     @EventListener(ApplicationReadyEvent.class)
     public synchronized void createDefaultData() {
-        weekdayService.create(new Weekday(LocalDate.now()));
-        weekdayService.create(new Weekday(LocalDate.now().plusDays(1)));
-        weekdayService.create(new Weekday(LocalDate.now().plusDays(2)));
-        weekdayService.create(new Weekday(LocalDate.now().plusDays(3)));
-
+        if (weekdayService. findAll().size() == 0) {
+            weekdayService.create(new Weekday(LocalDate.now()));
+            weekdayService.create(new Weekday(LocalDate.now().plusDays(1)));
+            weekdayService.create(new Weekday(LocalDate.now().plusDays(2)));
+            weekdayService.create(new Weekday(LocalDate.now().plusDays(3)));
+        }
     }
 
     //    @EventListener(ApplicationReadyEvent.class)

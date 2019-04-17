@@ -76,7 +76,7 @@ export class SelectMealComponent {
       const boughtIngredient = oldGroceryList.boughtIngredients[i];
       for (let j = 0; j < toBuyIngredients.length; j++) {
         const toBuyIngredient = toBuyIngredients[j];
-        if (boughtIngredient.designation === toBuyIngredient.designation) {
+        if (boughtIngredient.ingredientDetail.designation === toBuyIngredient.ingredientDetail.designation) {
           toBuyIngredients.splice(j, 1);
           break;
         }
@@ -86,9 +86,16 @@ export class SelectMealComponent {
   }
 
   getToBuyIngredientsFromWeekday(): Ingredient[] {
-    let toBuyIngredients = this.weekday.breakfast.ingredients;
-    toBuyIngredients = toBuyIngredients.concat(this.weekday.lunch.ingredients);
-    toBuyIngredients = toBuyIngredients.concat(this.weekday.dinner.ingredients);
+    let toBuyIngredients: Ingredient[] = [];
+    if (this.weekday.breakfast) {
+      toBuyIngredients = toBuyIngredients.concat(this.weekday.dinner.ingredients);
+    }
+    if (this.weekday.lunch) {
+      toBuyIngredients = toBuyIngredients.concat(this.weekday.lunch.ingredients);
+    }
+    if (this.weekday.dinner) {
+      toBuyIngredients = toBuyIngredients.concat(this.weekday.dinner.ingredients);
+    }
     return toBuyIngredients;
   }
 
