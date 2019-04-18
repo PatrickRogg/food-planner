@@ -14,4 +14,12 @@ export class GroceryListApiService {
   public getCurrentPlan(): Observable<GroceryList[]> {
     return this.http.get<GroceryList[]>(GROCERY_LIST_API_URL + 'current-plan');
   }
+
+  public updateGroceryList(groceryList: GroceryList): Observable<GroceryList> {
+    return this.http.put<GroceryList>(
+      GROCERY_LIST_API_URL + groceryList.id,
+      JSON.stringify(groceryList), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }

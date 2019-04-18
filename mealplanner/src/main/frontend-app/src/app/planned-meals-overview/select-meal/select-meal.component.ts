@@ -7,6 +7,7 @@ import { UpdateWeekday } from 'src/app/shared/ngrx/actions/weekday.actions';
 import * as groceryListActions from '../../shared/ngrx/actions/grocery-list.actions';
 import { GroceryList } from 'src/models/grocery-list.model';
 import { Ingredient } from 'src/models/ingredient.model';
+import { WeekdayApiService } from 'src/app/shared/service/api/weekday-api.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class SelectMealComponent {
     private modalController: ModalController,
     private navParams: NavParams,
     private store: Store<any>,
+    private weekdayApiService: WeekdayApiService,
   ) {}
 
   ionViewWillEnter() {
@@ -46,9 +48,9 @@ export class SelectMealComponent {
   public onMealSelect(meal: Meal) {
     if (this.selectedMeal !== meal) {
       this.setSelectedMealInWeekday(meal);
-      this.updateGroceryList(meal);
-      this.selectedMeal = meal;
-      this.saveWeekday();
+      // this.updateGroceryList(meal);
+      // this.selectedMeal = meal;
+      // this.saveWeekday();
     }
     this.dismissModal();
   }
@@ -115,5 +117,6 @@ export class SelectMealComponent {
     } else {
       this.weekday.dinner = meal;
     }
+    this.weekdayApiService.updateWeekday(this.weekday).subscribe();
   }
 }

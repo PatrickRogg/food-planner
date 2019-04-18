@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Meal } from 'src/models/meal.model';
-import { Weekday } from 'src/models/weekday.model';
 import { Ingredient } from 'src/models/ingredient.model';
 import { GroceryList } from 'src/models/grocery-list.model';
+import { GroceryListApiService } from '../shared/service/api/grocery-list-api.service';
+import { ViewController } from '@ionic/core';
 
 @Component({
   selector: 'app-grocery-list',
@@ -15,21 +15,26 @@ export class GroceryListPage implements OnInit {
 
   constructor(
     private store: Store<any>,
+    private groceryListApiService: GroceryListApiService,
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter () {
     this.getGroceryLists();
   }
 
   getGroceryLists() {
-    this.store.select('groceryList').subscribe(data => {
-      this.groceryLists = [];
-      const groceryListAsObject = data.entities;
-      Object.keys(groceryListAsObject).forEach(key => {
-        const groceryList: GroceryList = groceryListAsObject[key];
-        this.groceryLists.push(groceryList);
-      });
-    });
+    // this.store.select('groceryList').subscribe(data => {
+    //   this.groceryLists = [];
+    //   const groceryListAsObject = data.entities;
+    //   Object.keys(groceryListAsObject).forEach(key => {
+    //     const groceryList: GroceryList = groceryListAsObject[key];
+    //     this.groceryLists.push(groceryList);
+    //   });
+    // });
+    this.groceryListApiService.getCurrentPlan().subscribe(data => this.groceryLists = data);
   }
 
   public addToBought(ingredient: Ingredient, groceryList: GroceryList) {
@@ -41,6 +46,7 @@ export class GroceryListPage implements OnInit {
         break;
       }
     }
+    this.groceryListApiService.updateGroceryList(groceryList).subscribe();
   }
 
   public removeFromBought(ingredient: Ingredient, groceryList: GroceryList) {
@@ -52,5 +58,6 @@ export class GroceryListPage implements OnInit {
         break;
       }
     }
+    this.groceryListApiService.updateGroceryList(groceryList).subscribe();
   }
 }

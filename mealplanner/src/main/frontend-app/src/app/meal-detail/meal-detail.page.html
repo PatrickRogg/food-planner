@@ -11,7 +11,7 @@
     </ion-row>
   </ion-grid>
   <ion-item *ngFor="let ingredient of meal.ingredients; let i = index">
-    <ion-label>{{i + 1}}. {{ingredient.designation}}</ion-label>
+    <ion-label>{{i + 1}}. {{ingredient.ingredientDetail.designation}}</ion-label>
     <ion-note slot="end">{{ingredient.quantity}} {{ingredient.unit}}</ion-note>
   </ion-item>
 

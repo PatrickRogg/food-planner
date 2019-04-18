@@ -36,7 +36,9 @@ public class WeekdayService {
     }
 
     public Weekday update(Weekday weekday) {
-        return weekdayRepository.save(weekday);
+        Weekday updatedWeekday = weekdayRepository.save(weekday);
+        groceryListService.updateToBuyIngredients(updatedWeekday);
+        return updatedWeekday;
     }
 
     public void deleteById(long id) {

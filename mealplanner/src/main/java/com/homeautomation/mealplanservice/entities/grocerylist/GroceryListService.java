@@ -60,4 +60,11 @@ public class GroceryListService {
         List<Weekday> currentPlanWeekdays = weekdayService.findCurrentPlanWeekdays();
         return groceryListRepository.findByWeekdayIn(currentPlanWeekdays);
     }
+
+    public void updateToBuyIngredients(Weekday weekday) {
+        GroceryList groceryListOfWeekday = groceryListRepository.findByWeekday(weekday);
+        groceryListOfWeekday.setToBuyIngredients(getIngredientsFromWeekday(weekday));
+        groceryListOfWeekday.setBoughtIngredients(new ArrayList<>());
+        update(groceryListOfWeekday);
+    }
 }

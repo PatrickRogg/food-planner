@@ -42,8 +42,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.initializeStore();
-      this.subscribeToAppClose();
+      // this.initializeStore();
     });
   }
 
@@ -70,12 +69,6 @@ export class AppComponent {
       groceryLists.forEach(groceryList => {
         this.store.dispatch(new groceryListActions.CreateGroceryList(groceryList));
       });
-    });
-  }
-
-  subscribeToAppClose() {
-    window.addEventListener('beforeunload', () => {
-      
     });
   }
 }

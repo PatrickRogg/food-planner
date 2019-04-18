@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface GroceryListRepository extends JpaRepository<GroceryList, Long> {
     List<GroceryList> findByWeekdayIn(List<Weekday> currentPlanWeekdays);
+    GroceryList findByWeekday(Weekday weekday);
 }

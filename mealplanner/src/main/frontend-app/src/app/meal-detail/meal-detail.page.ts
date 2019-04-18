@@ -16,7 +16,6 @@ export class MealDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.meal)
     this.getMeal();
   }
 

@@ -7,6 +7,8 @@ import { OverlayEventDetail } from '@ionic/core';
 import { Store } from '@ngrx/store';
 import { GroceryList } from 'src/models/grocery-list.model';
 import { AppCloseApiService } from '../shared/service/api/app-close-api.service';
+import { WeekdayApiService } from '../shared/service/api/weekday-api.service';
+import { MealApiService } from '../shared/service/api/meal-api.service';
 
 @Component({
   selector: 'app-planned-meals-overview',
@@ -21,7 +23,8 @@ export class PlannedMealsOverviewPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private store: Store<any>,
-    private appCloseApiService: AppCloseApiService
+    private weekdayApiService: WeekdayApiService,
+    private mealApiService: MealApiService,
   ) { }
 
   ngOnInit() {
@@ -30,25 +33,27 @@ export class PlannedMealsOverviewPage implements OnInit {
   }
 
   getWeekdays() {
-    this.store.select('weekday').subscribe(data => {
-      this.weekdays = [];
-      const weekdayAsObject = data.entities;
-      Object.keys(weekdayAsObject).forEach(key => {
-        const weekday: Weekday = weekdayAsObject[key];
-        this.weekdays.push(weekday);
-      });
-    });
+    // this.store.select('weekday').subscribe(data => {
+    //   this.weekdays = [];
+    //   const weekdayAsObject = data.entities;
+    //   Object.keys(weekdayAsObject).forEach(key => {
+    //     const weekday: Weekday = weekdayAsObject[key];
+    //     this.weekdays.push(weekday);
+    //   });
+    // });
+    this.weekdayApiService.getCurrentAndNextThreeWeekdays().subscribe(data => this.weekdays = data);
   }
 
   getMeals() {
-    this.store.select('meal').subscribe(data => {
-      this.meals = [];
-      const mealsAsObject = data.entities;
-      Object.keys(mealsAsObject).forEach(key => {
-        const meal: Meal = mealsAsObject[key];
-        this.meals.push(meal);
-      });
-    });
+    // this.store.select('meal').subscribe(data => {
+    //   this.meals = [];
+    //   const mealsAsObject = data.entities;
+    //   Object.keys(mealsAsObject).forEach(key => {
+    //     const meal: Meal = mealsAsObject[key];
+    //     this.meals.push(meal);
+    //   });
+    // });
+    this.mealApiService.getMeals().subscribe(data => this.meals = data);
   }
 
   public async onMealCardClick(weekday: Weekday, mealType: string) {

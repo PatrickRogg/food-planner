@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DeleteMeal } from '../shared/ngrx/actions/meal.actions';
 import { MealDetailStateService } from '../meal-detail/meal-detail-state.service';
+import { MealApiService } from '../shared/service/api/meal-api.service';
 
 @Component({
   selector: 'app-meal-list',
@@ -17,21 +18,26 @@ export class MealListPage implements OnInit {
     private router: Router,
     private store: Store<any>,
     private mealDetailStateService: MealDetailStateService,
+    private mealApiService: MealApiService
   ) {}
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter () {
     this.getAllMeals();
   }
 
   getAllMeals() {
-    this.store.select('meal').subscribe(data => {
-      this.meals = [];
-      const mealsAsObject = data.entities;
-      Object.keys(mealsAsObject).forEach(key => {
-        const meal: Meal = mealsAsObject[key];
-        this.meals.push(meal);
-      });
-    });
+    // this.store.select('meal').subscribe(data => {
+    //   this.meals = [];
+    //   const mealsAsObject = data.entities;
+    //   Object.keys(mealsAsObject).forEach(key => {
+    //     const meal: Meal = mealsAsObject[key];
+    //     this.meals.push(meal);
+    //   });
+    // });
+    this.mealApiService.getMeals().subscribe(data => this.meals = data);
   }
 
   public onMealItemClick(meal: Meal) {
@@ -43,8 +49,8 @@ export class MealListPage implements OnInit {
     this.router.navigate(['meal-create-edit']);
   }
 
-  public deleteMeal(meal: Meal) {
-    this.store.dispatch(new DeleteMeal(meal.id));
-  }
+  // public deleteMeal(meal: Meal) {
+  //   this.store.dispatch(new DeleteMeal(meal.id));
+  // }
 
 }
