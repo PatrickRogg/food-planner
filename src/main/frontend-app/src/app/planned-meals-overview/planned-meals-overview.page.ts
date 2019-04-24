@@ -28,6 +28,9 @@ export class PlannedMealsOverviewPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.getWeekdays();
     this.getMeals();
   }
