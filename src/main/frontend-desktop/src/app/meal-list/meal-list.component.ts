@@ -25,7 +25,7 @@ export class MealListComponent implements OnInit {
   }
 
   public editMeal(meal: Meal) {
-    this.router.navigate(['edit-meal', meal.id]);
+    this.router.navigateByUrl('edit-meal/' + meal.id, { state: meal });
   }
 
   public deleteMeal(meal: Meal) {

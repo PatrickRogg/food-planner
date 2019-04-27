@@ -25,7 +25,7 @@ export class IngredientListComponent implements OnInit {
   }
 
   public editIngredientDetail(ingredientDetail: IngredientDetail) {
-    this.router.navigate(['ingredient-edit', ingredientDetail.id]);
+    this.router.navigateByUrl('edit-ingredient/' + ingredientDetail.id, { state: ingredientDetail});
   }
 
   public deleteIngredientDetail(ingredientDetail: IngredientDetail) {

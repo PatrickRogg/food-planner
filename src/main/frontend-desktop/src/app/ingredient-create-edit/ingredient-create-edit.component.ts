@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IngredientDetail } from '../shared/models/ingredient-detail.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IngredientDetailApiService } from '../shared/services/api/ingredient-detail-api.service';
 
 @Component({
@@ -11,13 +11,20 @@ import { IngredientDetailApiService } from '../shared/services/api/ingredient-de
 export class IngredientCreateEditComponent implements OnInit {
   title = 'Create ';
   ingredientDetail: IngredientDetail;
+
   constructor(
     private ingredientDetailApiService: IngredientDetailApiService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.ingredientDetail = new IngredientDetail('');
+    if (window.history.state.id) {
+      this.title = 'Edit ';
+      this.ingredientDetail.id = window.history.state.id;
+      this.ingredientDetail.designation = window.history.state.designation;
+    }
   }
 
   public submitForm() {

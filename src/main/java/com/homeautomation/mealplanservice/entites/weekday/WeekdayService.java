@@ -51,8 +51,4 @@ public class WeekdayService {
                 .map(date -> weekdayRepository.findByDate(date))
                 .collect(Collectors.toList());
     }
-
-    public void createWeekdayAndDeleteOldWeekday() {
-        create(new Weekday(LocalDate.now().plusDays(3), new Meal(), new Meal(), new Meal()));
-    }
 }

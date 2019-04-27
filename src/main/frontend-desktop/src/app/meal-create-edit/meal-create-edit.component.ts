@@ -25,6 +25,12 @@ export class MealCreateEditComponent implements OnInit {
 
   ngOnInit() {
     this.meal = new Meal('', '', []);
+    if (window.history.state.id) {
+      this.title = 'Edit '
+      this.meal.id = window.history.state.id;
+      this.meal.designation = window.history.state.designation;
+      this.meal.ingredients = window.history.state.ingredients;
+    }
     this.toAddIngredient = new Ingredient(null, 0, 'g');
     this.getAllIngredientDetailsFromServer();
   }
