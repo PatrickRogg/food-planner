@@ -49,6 +49,11 @@ public class GroceryListService {
     }
 
     public GroceryList update(GroceryList groceryList) {
+        GroceryList toUpdateGroceryList = groceryListRepository.findById(groceryList.getId()).orElse(null);
+
+        toUpdateGroceryList.setBoughtIngredients(groceryList.getBoughtIngredients());
+        toUpdateGroceryList.setToBuyIngredients(groceryList.getToBuyIngredients());
+
         return groceryListRepository.save(groceryList);
     }
 

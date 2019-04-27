@@ -32,7 +32,6 @@ public class GroceryListController {
 
     @PutMapping("{id}")
     public GroceryList update(@PathVariable("id") long id, @RequestBody GroceryList groceryList) {
-        System.out.println(groceryList.getBoughtIngredients());
         return groceryListService.update(groceryList);
     }
 }
