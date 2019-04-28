@@ -15,7 +15,7 @@ In the grocery list you can select the ingredients you bought and they get a gre
 
 ### Desktop-App
 
-![Desktop-App-Images](https://i.ibb.co/pnVNSnF/App-combinded.png)
+![Desktop-App-Images](https://i.ibb.co/rbDhPt2/Desktop-App-Combinded.png)
 
 
 ## Authors
