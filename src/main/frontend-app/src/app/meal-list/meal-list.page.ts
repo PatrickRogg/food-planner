@@ -41,7 +41,7 @@ export class MealListPage implements OnInit {
   }
 
   public onMealItemClick(meal: Meal) {
-    this.router.navigateByUrl('meal-detail/' + meal.id);
+    this.router.navigateByUrl('tabs/meal-detail/' + meal.id);
     this.mealDetailStateService.setCurrentMealState(meal);
   }
 
