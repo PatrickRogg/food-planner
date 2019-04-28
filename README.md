@@ -6,29 +6,16 @@ In the grocery list you can select the ingredients you bought and they get a gre
 - Java with Spring Boot
 - Ionic 4
 
-## Pictures of the Application
+## Pictures of the Applications
 
-- Overview over the Meals that are planned this week!
+### App
 
-![Meal-Overview](https://i.ibb.co/2329pzw/Planned-Meals.png)
-
-
-- Select a new Meal for a weekday
-
-![Meal-Select](https://i.ibb.co/4NW9yVx/Meal-select.png)
-
-- Overview over the Ingredients that have to be bought that day
-
-![Ingredient-Overview](https://i.ibb.co/jWhKJfg/Ingredient-overview.png)
+![App-Images](https://i.ibb.co/pnVNSnF/App-combinded.png)
 
 
-- List of all Meals that the User created
+### Desktop-App
 
-![Meal-List](https://i.ibb.co/FHXc7zW/Meal-overview.png)
-
-- Create Meal View
-
-![Meal-Create-View](https://i.ibb.co/VtVKGwf/meal-create.png)
+![Desktop-App-Images](https://i.ibb.co/pnVNSnF/App-combinded.png)
 
 
 ## Authors
