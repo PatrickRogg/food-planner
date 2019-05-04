@@ -44,7 +44,10 @@ export class PlannedMealsOverviewPage implements OnInit {
     //     this.weekdays.push(weekday);
     //   });
     // });
-    this.weekdayApiService.getCurrentAndNextThreeWeekdays().subscribe(data => this.weekdays = data);
+    this.weekdayApiService.getCurrentAndNextThreeWeekdays().subscribe(data => {
+      this.weekdays = data;
+      console.log(data)
+    });
   }
 
   getMeals() {

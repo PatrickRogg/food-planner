@@ -18,7 +18,7 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 30 1 * * ?")
     private void createNewWeekday() {
-        weekdayService.create(new Weekday(LocalDate.now(), null, null, null));
+        weekdayService.create(new Weekday(LocalDate.now().plusDays(3), null, null, null));
         System.out.println("weekday created");
     }
 }
