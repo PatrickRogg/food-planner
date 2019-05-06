@@ -33,6 +33,7 @@ export class PlannedMealsOverviewPage implements OnInit {
   ionViewDidEnter() {
     this.getWeekdays();
     this.getMeals();
+    console.log("asd")
   }
 
   getWeekdays() {
@@ -46,7 +47,6 @@ export class PlannedMealsOverviewPage implements OnInit {
     // });
     this.weekdayApiService.getCurrentAndNextThreeWeekdays().subscribe(data => {
       this.weekdays = data;
-      console.log(data)
     });
   }
 

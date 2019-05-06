@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <a slot="end" id="close-button" (click)="dismissModal()">Close</a>
+    <ion-title>Add Ingredient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label position="fixed">Search:</ion-label>
+    <ion-input placeholder="Tomate" padding [(ngModel)]="searchText" (ngModelChange)="onInputChange($event)"></ion-input>
+  </ion-item>
+
+  <div *ngFor="let ingredientDetail of filteredIngredientDetails" class="button-wrapper">
+    <ion-button expand="block" color="light" (click)="selectIngredientDetail(ingredientDetail)">
+      {{ ingredientDetail.designation }}
+    </ion-button>
+  </div>
+</ion-content>

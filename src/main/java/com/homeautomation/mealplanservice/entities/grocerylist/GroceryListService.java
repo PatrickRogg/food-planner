@@ -1,6 +1,7 @@
 package com.homeautomation.mealplanservice.entities.grocerylist;
 
 import com.homeautomation.mealplanservice.controller.entities.ingredient.Ingredient;
+import com.homeautomation.mealplanservice.controller.entities.ingredient.IngredientService;
 import com.homeautomation.mealplanservice.entites.weekday.Weekday;
 import com.homeautomation.mealplanservice.entites.weekday.WeekdayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import java.util.List;
 public class GroceryListService {
     @Autowired
     private GroceryListRepository groceryListRepository;
+    @Autowired
+    private IngredientService ingredientService;
 
     @Autowired
     private WeekdayService weekdayService;
@@ -51,10 +54,23 @@ public class GroceryListService {
     public GroceryList update(GroceryList groceryList) {
         GroceryList toUpdateGroceryList = groceryListRepository.findById(groceryList.getId()).orElse(null);
 
+        Ingredient unsavedIngredient = null;
+        for (Ingredient ingredient : groceryList.getToBuyIngredients()) {
+            if (ingredient.getId() == 0) {
+                unsavedIngredient = ingredient;
+                break;
+            }
+        }
+
+        if (unsavedIngredient != null) {
+            groceryList.getToBuyIngredients().add(ingredientService.create(unsavedIngredient));
+            groceryList.getToBuyIngredients().remove(unsavedIngredient);
+        }
+
         toUpdateGroceryList.setBoughtIngredients(groceryList.getBoughtIngredients());
         toUpdateGroceryList.setToBuyIngredients(groceryList.getToBuyIngredients());
 
-        return groceryListRepository.save(groceryList);
+        return groceryListRepository.save(toUpdateGroceryList);
     }
 
     public void deleteBy(long id) {

@@ -1,17 +1,26 @@
 <ion-content padding>
   <ion-item-group *ngFor="let groceryList of groceryLists">
     <ion-item-divider>
-      <ion-label>{{groceryList.weekday.date | date: 'EEEE'}}</ion-label>
+      <ion-label>
+        {{groceryList.weekday.date | date: 'EEEE'}}
+        <ion-button (click)="addIngredientTo(groceryList)">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-label>
     </ion-item-divider>
 
-    <ion-item *ngFor="let ingredient of groceryList.toBuyIngredients" 
-    (click)="addToBought(ingredient, groceryList)" color="danger">
+    <ion-item color="danger" (click)="addToBought(ingredient, groceryList)"
+      *ngFor="let ingredient of groceryList.toBuyIngredients">
       <ion-label>{{ingredient.ingredientDetail.designation}}</ion-label>
+      <span padding>{{ingredient.quantity}} {{ingredient.unit}}</span>
+      <ion-button color="light" (click)="deleteIngredientFromToBuy(ingredient, groceryList)">Entfernen</ion-button>
     </ion-item>
 
-    <ion-item *ngFor="let ingredient of groceryList.boughtIngredients" 
-    (click)="removeFromBought(ingredient, groceryList)" color="success">
+    <ion-item color="success" (click)="removeFromBought(ingredient, groceryList)"
+      *ngFor="let ingredient of groceryList.boughtIngredients">
       <ion-label>{{ingredient.ingredientDetail.designation}}</ion-label>
+      <span padding>{{ingredient.quantity}} {{ingredient.unit}}</span>
+      <ion-button color="light" (click)="deleteIngredientFromBought(ingredient, groceryList)">Entfernen</ion-button>
     </ion-item>
   </ion-item-group>
 </ion-content>

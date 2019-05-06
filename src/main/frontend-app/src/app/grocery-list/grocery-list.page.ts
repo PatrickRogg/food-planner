@@ -4,6 +4,8 @@ import { Ingredient } from 'src/models/ingredient.model';
 import { GroceryList } from 'src/models/grocery-list.model';
 import { GroceryListApiService } from '../shared/service/api/grocery-list-api.service';
 import { ViewController } from '@ionic/core';
+import { ModalController } from '@ionic/angular';
+import { AddIngredientComponent } from './add-ingredient/add-ingredient.component';
 
 @Component({
   selector: 'app-grocery-list',
@@ -12,10 +14,12 @@ import { ViewController } from '@ionic/core';
 })
 export class GroceryListPage implements OnInit {
   groceryLists: GroceryList[] = [];
+  addIngredientModal: HTMLIonModalElement;
 
   constructor(
-    private store: Store<any>,
     private groceryListApiService: GroceryListApiService,
+    public modalController: ModalController,
+
   ) { }
 
   ngOnInit() {
@@ -58,6 +62,46 @@ export class GroceryListPage implements OnInit {
         break;
       }
     }
+    this.groceryListApiService.updateGroceryList(groceryList).subscribe();
+  }
+
+  public async addIngredientTo(groceryList: GroceryList) {
+    await this.openModal(groceryList);
+    return await this.addIngredientModal.present();
+  }
+
+  async openModal(groceryList: GroceryList) {
+    this.addIngredientModal = await this.modalController.create({
+      component: AddIngredientComponent,
+      componentProps: {
+        groceryList: groceryList,
+      }
+    });
+    this.onAddIngredientModalDismiss();
+  }
+
+  async onAddIngredientModalDismiss() {
+    await this.addIngredientModal.onDidDismiss().then(data => {
+      if (data.data) {
+        for (let index = 0; index < this.groceryLists.length; index++) {
+          const element = this.groceryLists[index];
+
+          if (element.id === data.data.id) {
+            this.groceryLists[index] = data.data;
+          }
+        }
+      }
+    });
+  }
+
+  public deleteIngredientFromBought(ingredient: Ingredient, groceryList: GroceryList) {
+    groceryList.boughtIngredients.splice(groceryList.boughtIngredients.indexOf(ingredient));
+    this.groceryListApiService.updateGroceryList(groceryList).subscribe();
+
+  }
+
+  public deleteIngredientFromToBuy(ingredient: Ingredient, groceryList: GroceryList) {
+    groceryList.toBuyIngredients.splice(groceryList.toBuyIngredients.indexOf(ingredient));
     this.groceryListApiService.updateGroceryList(groceryList).subscribe();
   }
 }
