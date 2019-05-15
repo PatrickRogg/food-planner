@@ -144,7 +144,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MEAL_API_URL", function() { return MEAL_API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INGREDIENT_API_URL", function() { return INGREDIENT_API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INGREDIENT_DETAIL_API_URL", function() { return INGREDIENT_DETAIL_API_URL; });
-var API_URL = 'http://localhost:8080/api/';
+// const API_URL = environment.apiUrl;
+var API_URL = 'https://meal-planner-rest-api.herokuapp.com/api/';
 var MEAL_API_URL = API_URL + 'meals/';
 var INGREDIENT_API_URL = API_URL + 'ingredients/';
 var INGREDIENT_DETAIL_API_URL = API_URL + 'ingredient-details/';
@@ -337,13 +338,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var IngredientCreateEditComponent = /** @class */ (function () {
-    function IngredientCreateEditComponent(ingredientDetailApiService, router) {
+    function IngredientCreateEditComponent(ingredientDetailApiService, router, activatedRoute) {
         this.ingredientDetailApiService = ingredientDetailApiService;
         this.router = router;
+        this.activatedRoute = activatedRoute;
         this.title = 'Create ';
     }
     IngredientCreateEditComponent.prototype.ngOnInit = function () {
         this.ingredientDetail = new _shared_models_ingredient_detail_model__WEBPACK_IMPORTED_MODULE_1__["IngredientDetail"]('');
+        if (window.history.state.id) {
+            this.title = 'Edit ';
+            this.ingredientDetail.id = window.history.state.id;
+            this.ingredientDetail.designation = window.history.state.designation;
+        }
     };
     IngredientCreateEditComponent.prototype.submitForm = function () {
         var _this = this;
@@ -361,7 +368,8 @@ var IngredientCreateEditComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./ingredient-create-edit.component.scss */ "./src/app/ingredient-create-edit/ingredient-create-edit.component.scss")]
         }),
         __metadata("design:paramtypes", [_shared_services_api_ingredient_detail_api_service__WEBPACK_IMPORTED_MODULE_3__["IngredientDetailApiService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], IngredientCreateEditComponent);
     return IngredientCreateEditComponent;
 }());
@@ -431,7 +439,7 @@ var IngredientListComponent = /** @class */ (function () {
         this.ingredientDetailApiService.getAll().subscribe(function (data) { return _this.ingredientDetails = data; });
     };
     IngredientListComponent.prototype.editIngredientDetail = function (ingredientDetail) {
-        this.router.navigate(['ingredient-edit', ingredientDetail.id]);
+        this.router.navigateByUrl('edit-ingredient/' + ingredientDetail.id, { state: ingredientDetail });
     };
     IngredientListComponent.prototype.deleteIngredientDetail = function (ingredientDetail) {
         var _this = this;
@@ -460,7 +468,7 @@ var IngredientListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h3 class=\"mb-5\">{{title}} Meal</h3>\n  <div class=\"input-group mb-3\">\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Designation</span>\n    </div>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Spaghetti Bolonese\" [(ngModel)]=\"meal.designation\">\n  </div>\n  <div class=\"input-group-prepend mb-3\">\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Recipe Url</span>\n    </div>\n    <input type=\"text\" class=\"form-control\" placeholder=\"https://google.com\" [(ngModel)]=\"meal.recipeUrl\">\n  </div>\n\n  <div class=\"input-group mb-3\">\n    <div class=\"input-group-prepend\">\n      <label class=\"input-group-text\" for=\"inputGroupSelect01\" style=\"width: 140px !important\">IngredientDetail</label>\n    </div>\n    <select class=\"custom-select mr-3\" id=\"inputGroupSelect01\" [(ngModel)]=\"toAddIngredient.ingredientDetail\">\n      <option [ngValue]=\"ingredientDetail\" *ngFor=\"let ingredientDetail of ingredientDetails\">{{ingredientDetail.designation}}</option>\n    </select>\n\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Quantity</span>\n    </div>\n    <input type=\"number\" class=\"form-control mr-3\" [(ngModel)]=\"toAddIngredient.quantity\">\n\n    <div class=\"input-group-prepend\">\n      <label class=\"input-group-text\" for=\"inputGroupSelect01\" style=\"width: 140px !important\">Ingredient</label>\n    </div>\n    <select class=\"custom-select  mr-3\" id=\"inputGroupSelect01\" [(ngModel)]=\"toAddIngredient.unit\">\n      <option value=\"g\">Gramm</option>\n      <option value=\"kg\">Kilogramm</option>\n      <option value=\"pcs\">Pieces</option>\n      <option value=\"l\">Liter</option>\n    </select>\n\n    <button class=\"btn btn-success btn-sm\" (click)=\"addIngredient()\">Add</button>\n  </div>\n\n  <table class=\"table mt-3\">\n    <thead>\n      <tr>\n        <th scope=\"col\">#</th>\n        <th scope=\"col\">Designation</th>\n        <th scope=\"col\">Quantity</th>\n        <th></th>\n        <th></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let ingredient of meal.ingredients; let i = index\">\n        <td>{{i + 1}}</td>\n        <td>{{ingredient.ingredientDetail.designation}}</td>\n        <td>{{ingredient.quantity}} {{ingredient.unit}}</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class=\"row pt-5\">\n    <div class=\"col-12 text-right\">\n      <button class=\"btn btn-lg btn-primary\" (click)=\"submitForm()\">Submit</button>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <h3 class=\"mb-5\">{{title}} Meal</h3>\n  <div class=\"input-group mb-3\">\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Designation</span>\n    </div>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Spaghetti Bolonese\" [(ngModel)]=\"meal.designation\">\n  </div>\n  <div class=\"input-group-prepend mb-3\">\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Recipe Url</span>\n    </div>\n    <input type=\"text\" class=\"form-control\" placeholder=\"https://google.com\" [(ngModel)]=\"meal.recipeUrl\">\n  </div>\n\n  <div class=\"input-group mb-3\">\n    <div class=\"input-group-prepend\">\n      <label class=\"input-group-text\" for=\"inputGroupSelect01\" style=\"width: 140px !important\">IngredientDetail</label>\n    </div>\n    <select class=\"custom-select mr-3\" id=\"inputGroupSelect01\" [(ngModel)]=\"toAddIngredient.ingredientDetail\">\n      <option [ngValue]=\"ingredientDetail\" *ngFor=\"let ingredientDetail of ingredientDetails\">{{ingredientDetail.designation}}</option>\n    </select>\n\n    <div class=\"input-group-prepend\">\n      <span class=\"input-group-text\" style=\"width: 140px !important\">Quantity</span>\n    </div>\n    <input type=\"number\" class=\"form-control mr-3\" [(ngModel)]=\"toAddIngredient.quantity\">\n\n    <div class=\"input-group-prepend\">\n      <label class=\"input-group-text\" for=\"inputGroupSelect01\" style=\"width: 140px !important\">Ingredient</label>\n    </div>\n    <select class=\"custom-select  mr-3\" id=\"inputGroupSelect01\" [(ngModel)]=\"toAddIngredient.unit\">\n      <option value=\"g\">Gramm</option>\n      <option value=\"kg\">Kilogramm</option>\n      <option value=\"pcs\">Pieces</option>\n      <option value=\"l\">Liter</option>\n    </select>\n\n    <button class=\"btn btn-success btn-sm\" (click)=\"addIngredient()\">Add</button>\n  </div>\n\n  <table class=\"table mt-3\">\n    <thead>\n      <tr>\n        <th scope=\"col\">#</th>\n        <th scope=\"col\">Designation</th>\n        <th scope=\"col\">Quantity</th>\n        <th></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let ingredient of meal.ingredients; let i = index\">\n        <td>{{i + 1}}</td>\n        <td>{{ingredient.ingredientDetail.designation}}</td>\n        <td>{{ingredient.quantity}} {{ingredient.unit}}</td>\n        <td>\n          <button class=\"btn btn-danger\" (click)=\"removeIngredient(i)\">Löschen</button>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class=\"row pt-5\">\n    <div class=\"col-12 text-right\">\n      <button class=\"btn btn-lg btn-primary\" (click)=\"submitForm()\">Submit</button>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -516,6 +524,13 @@ var MealCreateEditComponent = /** @class */ (function () {
     }
     MealCreateEditComponent.prototype.ngOnInit = function () {
         this.meal = new _shared_models_meal_model__WEBPACK_IMPORTED_MODULE_1__["Meal"]('', '', []);
+        if (window.history.state.id) {
+            this.title = 'Edit ';
+            this.meal.id = window.history.state.id;
+            this.meal.designation = window.history.state.designation;
+            this.meal.recipeUrl = window.history.state.recipeUrl;
+            this.meal.ingredients = window.history.state.ingredients;
+        }
         this.toAddIngredient = new _shared_models_ingredient_model__WEBPACK_IMPORTED_MODULE_4__["Ingredient"](null, 0, 'g');
         this.getAllIngredientDetailsFromServer();
     };
@@ -535,6 +550,9 @@ var MealCreateEditComponent = /** @class */ (function () {
     MealCreateEditComponent.prototype.addIngredient = function () {
         this.meal.ingredients.push(this.toAddIngredient);
         this.toAddIngredient = new _shared_models_ingredient_model__WEBPACK_IMPORTED_MODULE_4__["Ingredient"](null, 0, 'g');
+    };
+    MealCreateEditComponent.prototype.removeIngredient = function (index) {
+        this.meal.ingredients.splice(index, 1);
     };
     MealCreateEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -614,7 +632,7 @@ var MealListComponent = /** @class */ (function () {
         this.mealApiService.getAll().subscribe(function (data) { return _this.meals = data; });
     };
     MealListComponent.prototype.editMeal = function (meal) {
-        this.router.navigate(['meal-edit', meal.id]);
+        this.router.navigateByUrl('edit-meal/' + meal.id, { state: meal });
     };
     MealListComponent.prototype.deleteMeal = function (meal) {
         var _this = this;
@@ -643,7 +661,7 @@ var MealListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-danger mb-5\">\n  <a class=\"navbar-brand\" routerLink=\"/\">Navbar</a>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-dark bg-danger mb-5\">\n  <a class=\"navbar-brand\" routerLink=\"/\">Mealplanner</a>\n</nav>\n"
 
 /***/ }),
 
@@ -898,20 +916,10 @@ var MealApiService = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false
+    production: false,
+    apiUrl: 'http://localhost:8080/api/'
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),
@@ -949,7 +957,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\frontend-desktop\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\mealplanner\mealplanner\src\main\frontend-desktop\src\main.ts */"./src/main.ts");
 
 
 /***/ })

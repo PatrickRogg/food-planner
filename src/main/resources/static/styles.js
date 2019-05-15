@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\frontend-desktop\src\styles.scss */"./src/styles.scss");
-module.exports = __webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\frontend-desktop\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\mealplanner\mealplanner\src\main\frontend-desktop\src\styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! C:\Users\rogg\Documents\Meine Projekte\home-automation\mealplanner\mealplanner\src\main\frontend-desktop\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })
