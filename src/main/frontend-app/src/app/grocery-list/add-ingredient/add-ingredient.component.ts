@@ -16,6 +16,7 @@ export class AddIngredientComponent implements OnInit {
   filteredIngredientDetails: IngredientDetail[] = [];
   searchText = '';
   groceryList: GroceryList;
+  ingredient = new Ingredient(null, 0, '');
 
   constructor(
     private ingredientDetailApiService: IngredientDetailApiService,
@@ -48,12 +49,13 @@ export class AddIngredientComponent implements OnInit {
   }
 
   public selectIngredientDetail(ingredientDetail: IngredientDetail) {
-    this.groceryList.toBuyIngredients.push(new Ingredient(ingredientDetail, 1, 'pcs'));
-    this.dismissModal();
-    this.groceryListApiService.updateGroceryList(this.groceryList).subscribe();
+    this.ingredient.ingredientDetail = ingredientDetail;
+    this.groceryList.toBuyIngredients.push(this.ingredient);
+
+    this.groceryListApiService.updateGroceryList(this.groceryList).subscribe(data => this.dismissModal(data));
   }
 
-  public async dismissModal() {
-    await this.modalController.dismiss();
+  public async dismissModal(groceryList?: GroceryList) {
+    await this.modalController.dismiss(groceryList);
   }
 }

@@ -82,7 +82,15 @@ export class GroceryListPage implements OnInit {
 
   async onAddIngredientModalDismiss() {
     await this.addIngredientModal.onDidDismiss().then(data => {
-      this.getGroceryLists();
+      if (data.data) {
+        for (let index = 0; index < this.groceryLists.length; index++) {
+          const element = this.groceryLists[index];
+
+          if (element.id === data.data.id) {
+            this.groceryLists[index] = data.data;
+          }
+        }
+      }
     });
   }
 

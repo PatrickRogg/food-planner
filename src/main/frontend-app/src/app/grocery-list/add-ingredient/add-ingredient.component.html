@@ -7,8 +7,23 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-label position="fixed">Search:</ion-label>
-    <ion-input placeholder="Tomate" padding [(ngModel)]="searchText" (ngModelChange)="onInputChange($event)"></ion-input>
+    <ion-label>Quantity:</ion-label>
+    <ion-input type="number" [(ngModel)]="ingredient.quantity"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Unit</ion-label>
+    <ion-select placeholder="Select Uit" [(ngModel)]="ingredient.unit">
+      <ion-select-option value="kg">kg</ion-select-option>
+      <ion-select-option value="g">g</ion-select-option>
+      <ion-select-option value="pieces">pieces</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Search</ion-label>
+    <ion-input placeholder="Tomate" padding [(ngModel)]="searchText" (ngModelChange)="onInputChange($event)">
+    </ion-input>
   </ion-item>
 
   <div *ngFor="let ingredientDetail of filteredIngredientDetails" class="button-wrapper">
