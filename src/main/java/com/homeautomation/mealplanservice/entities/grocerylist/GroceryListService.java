@@ -64,6 +64,7 @@ public class GroceryListService {
 
         if (unsavedIngredient != null) {
             groceryList.getToBuyIngredients().add(ingredientService.create(unsavedIngredient));
+            groceryList.getToBuyIngredients().remove(unsavedIngredient);
         }
 
         toUpdateGroceryList.setBoughtIngredients(groceryList.getBoughtIngredients());
